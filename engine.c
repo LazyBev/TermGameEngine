@@ -2,16 +2,16 @@
 #include "conway.h"
 
 int main() {
-    int gameChoice;
-
+    int gameChoices;
+    
     for(;;) {
         system("clear");
         printf("Games:\n");
         printf("1) Conway\n\n");
         printf("> ");
-        scanf("%d", gameChoice);
+        scanf("%d", gameChoices);
 
-        switch(gameChoice) {
+        switch(gameChoices) {
             case 1:
                 conway();
             default:
