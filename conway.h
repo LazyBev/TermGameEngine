@@ -5,7 +5,6 @@
 
 #define ROWS 18
 #define COLS 36
-#define LEN 10
 
 int front[ROWS][COLS] = {0};
 int back[ROWS][COLS] = {0};
@@ -53,25 +52,25 @@ void conwayNext(void) {
 void saveCursor() { printf("\0337"); }
 void loadCursor() { printf("\0338"); }
 
-int conway() {
+int startConway() {
     int sRows, sCols;
-    char Spix[LEN];
+    char sPix[] = "\0";
 
     printf("How many pixels: ");
-    scanf("%s", Spix);
-    if (strcmp(Spix, "glider") == 0) {
+    scanf("%s", sPix);
+    if (strcmp(sPix, "glider") == 0) {
         front[0][1] = 1;
         front[1][2] = 1;
         front[2][0] = 1;
         front[2][1] = 1;
         front[2][2] = 1;
     } else {
-        int Ipix = atoi(Spix);
-        if (Ipix <= 0) {
+        int iPix = atoi(sPix);
+        if (iPix <= 0) {
             printf("Invalid number of pixels.\n");
             return 1;
         }
-        for (int i = 0; i < Ipix; ++i) {
+        for (int i = 0; i < iPix; ++i) {
             printf("Enter [Row] [Col]: ");
             scanf("%d %d", &sRows, &sCols);
             if (sRows >= 0 && sRows < ROWS && sCols >= 0 && sCols < COLS) {
