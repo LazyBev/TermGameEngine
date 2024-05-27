@@ -2,8 +2,8 @@
 #include <unistd.h>
 #include <stdio.h>
 
-#define ROWS 16
-#define COLS 32
+#define ROWS 18
+#define COLS 36
 
 int front[ROWS][COLS] = {0};
 int back[ROWS][COLS] = {0};
