@@ -9,7 +9,7 @@ int main() {
         printf("Games:\n");
         printf("1) Conway\n\n");
         printf("> ");
-        scanf("%d", gameChoices);
+        scanf("%d", &gameChoices);
 
         switch(gameChoices) {
             case 1:
