@@ -1,9 +1,11 @@
 #include <string.h>
 #include <unistd.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #define ROWS 18
 #define COLS 36
+#define LEN 10
 
 int front[ROWS][COLS] = {0};
 int back[ROWS][COLS] = {0};
@@ -48,36 +50,45 @@ void conwayNext(void) {
     }
 }
 
+void saveCursor() { printf("\0337"); }
+void loadCursor() { printf("\0338"); }
+
 int conway() {
-    int sRows, sCols, pix;
-	int glider = 000;
+    int sRows, sCols;
+    char Spix[LEN];
 
     printf("How many pixels: ");
-    scanf("%d", &pix);
-	if (pix == glider) {
-		front[0][1] = 1;
-		front[1][2] = 1;
-		front[2][0] = 1;
-		front[2][1] = 1;
-		front[2][2] = 1;
-	} else {
-		for (int i = 0; i < pix; ++i) {
-			printf("Enter [Row] [Col]: ");
-			scanf("%d %d", &sRows, &sCols);
-			if (sRows >= 0 && sRows < ROWS && sCols >= 0 && sCols < COLS) {
-				front[sRows][sCols] = 1;
-			} else {
-				printf("Invalid coordinates. Try again.\n");
-				--i;
-			}
-		}
-	}
+    scanf("%s", Spix);
+    if (strcmp(Spix, "glider") == 0) {
+        front[0][1] = 1;
+        front[1][2] = 1;
+        front[2][0] = 1;
+        front[2][1] = 1;
+        front[2][2] = 1;
+    } else {
+        int Ipix = atoi(Spix);
+        if (Ipix <= 0) {
+            printf("Invalid number of pixels.\n");
+            return 1;
+        }
+        for (int i = 0; i < Ipix; ++i) {
+            printf("Enter [Row] [Col]: ");
+            scanf("%d %d", &sRows, &sCols);
+            if (sRows >= 0 && sRows < ROWS && sCols >= 0 && sCols < COLS) {
+                front[sRows][sCols] = 1;
+            } else {
+                printf("Invalid coordinates. Try again.\n");
+                --i;
+            }
+        }
+    }
 
+    saveCursor();
     for (;;) {
         conwayDisplay();
         conwayNext();
         memcpy(front, back, sizeof(front));
-		printf("\033[%dA\033[%dD", ROWS, COLS);
+        loadCursor();
         usleep(100 * 1000);
     }
     return 0;
