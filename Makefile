@@ -1,4 +1,4 @@
 .PHONY: all
 
 all:
-	gcc -o engine engine.c -Wall
+	gcc -o engine engine.c -Wall -Wextra
