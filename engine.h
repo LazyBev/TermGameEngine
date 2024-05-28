@@ -21,7 +21,7 @@ typedef struct Engine {
 void saveCursor();
 void loadCursor();
 void display(Engine* engine, int Rows, int Cols);
-int mod(int a, int b);
+int realMod(int a, int b);
 int delay(int seconds);
 void initEngine(Engine* engine);
 
